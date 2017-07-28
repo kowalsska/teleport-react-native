@@ -20,6 +20,15 @@ class RequestCard extends React.Component {
             location: nextProps.destination,
         });
     }
+
+    requestAcepted(props) {
+        console.log("Accepted request!", props.username)
+    }
+
+    requestDeclined(props) {
+        console.log("Accepted declined!", props.username)
+    }
+
     render() {
         return (
             <Card>
@@ -28,7 +37,6 @@ class RequestCard extends React.Component {
                         large
                         rounded
                         source={{ uri: this.props.avatar }}
-                        onPress={() => console.log("Works!")}
                         activeOpacity={0.7}
                     />
                     <Text style={{ marginBottom: 10, flex: 1 }}>{this.props.username} from {this.props.location} wants to teleport near you.
@@ -38,11 +46,13 @@ class RequestCard extends React.Component {
                     <Button
                         icon={{ name: 'close' }}
                         backgroundColor='#E42525'
+                        onPress={() => this.requestDeclined(this.props)}
                         buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                         title='Decline' />
                     <Button
                         icon={{ name: 'check' }}
                         backgroundColor='#89D122'
+                        onPress={() => this.requestAcepted(this.props)}
                         buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                         title='Accept' />
                 </View>

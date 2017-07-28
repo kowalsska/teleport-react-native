@@ -30,12 +30,16 @@
     "@expo/vector-icons": "^5.0.0",
     "color": "^2.0.0",
     "expo": "^19.0.0",
+    "hoist-non-react-statics": "^2.2.1",
     "moment": "^2.18.1",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.46.4",
+    "react-native-dropdownalert": "^2.10.0",
     "react-native-elements": "^0.15.0",
     "react-native-extended-stylesheet": "^0.6.0",
     "react-native-maps": "^0.15.3",
-    "react-native-material-design": "^0.3.7"
+    "react-native-material-design": "^0.3.7",
+    "react-navigation": "^1.0.0-beta.11",
+    "realm": "^1.10.0"
   }
 }

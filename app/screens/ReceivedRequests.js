@@ -1,12 +1,16 @@
 import React from 'react';
 import { FlatList, Text, StatusBar, View, Image } from 'react-native';
-import { Card, ListItem, Button, Avatar } from 'react-native-elements'
+import { Card, ListItem, Button, Avatar, Icon } from 'react-native-elements'
 import { RequestCard } from '../components/RequestCard'
 import requests from '../data/requests';
 
 class ReceivedRequests extends React.Component {
-  handlePress = () => {
-    console.log('row press');
+  static navigationOptions = {
+    tabBarLabel: 'Received Requests',
+    showIcon: true,
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="wifi-tethering" />
+    ),
   };
 
   render() {
