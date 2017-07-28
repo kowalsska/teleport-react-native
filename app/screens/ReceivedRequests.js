@@ -5,13 +5,6 @@ import { RequestCard } from '../components/RequestCard'
 import requests from '../data/requests';
 
 class ReceivedRequests extends React.Component {
-  static navigationOptions = {
-    tabBarLabel: 'Received Requests',
-    showIcon: true,
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="wifi-tethering" />
-    ),
-  };
 
   render() {
     return (

@@ -5,13 +5,6 @@ import { RequestCard } from '../components/RequestCard'
 import requests from '../data/requests';
 
 class SentRequests extends React.Component {
-	static navigationOptions = {
-		tabBarLabel: 'Sent Requests',
-		showIcon: true,
-		tabBarIcon: ({ tintColor }) => (
-			<Icon name="my-location" />
-		),
-	};
 
 	render() {
 		return (

@@ -7,7 +7,7 @@ import ReceivedRequests from './screens/ReceivedRequests';
 import Navigator from './config/routes';
 
 EStyleSheet.build({
-    $primaryBlue: '#4F6D7A',
+    $primaryBlue: '#EDEFEA',
 });
 
 export default () => <Navigator />;
