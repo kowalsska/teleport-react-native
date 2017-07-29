@@ -11,6 +11,8 @@ const reducer = (state = initialState, action) => {
                     timestamp: action.timestamp,
                     lat: action.lat,
                     lng: action.lng,
+                    username: action.username,
+                    message: action.message
                 }
             ]
         default:

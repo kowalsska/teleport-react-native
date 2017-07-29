@@ -1,9 +1,12 @@
-import React, { Props } from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements'
 import styles from './styles';
 
 class ReceivedRequestCard extends React.Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
     constructor(props) {
         super(props);
 
@@ -23,6 +26,7 @@ class ReceivedRequestCard extends React.Component {
 
     handleSeeGallery(timestamp) {
         console.log("See gallery: ", timestamp);
+        //this.props.navigation.navigate()
     }
 
     render() {

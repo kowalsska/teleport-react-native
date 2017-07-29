@@ -1,13 +1,15 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+
 import Home from '../screens/Home';
 import ReceivedRequests from '../screens/ReceivedRequests';
 import Settings from '../screens/Settings';
 import SentRequests from '../screens/SentRequests';
+import Login from '../screens/Login';
 
-export default TabNavigator({
+const MainScreenNavigator = TabNavigator({
     SentRequests: {
         screen: SentRequests,
         navigationOptions: {
@@ -52,3 +54,21 @@ export default TabNavigator({
             showIcon: true,
         },
     });
+
+export default AppNavigator = StackNavigator({
+    Main: {
+        screen: MainScreenNavigator,
+        navigationOptions: {
+            header: () => null,
+        }
+    },
+    Login: {
+        screen: Login,
+        navigationOptions: {
+            header: () => null,
+        }
+    },
+}, {
+        initialRouteName: "Login",
+    },
+)

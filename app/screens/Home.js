@@ -21,7 +21,7 @@ class Home extends React.Component {
 
 	handleSendRequest = () => {
 		this.props.dispatch(sendRequest(this.mapComponent.state.region.latitude,
-			this.mapComponent.state.region.longitude, moment().format('x')));
+			this.mapComponent.state.region.longitude, moment().format('x'), "Magda", "What is up?"));
 	}
 
 	render() {
@@ -29,9 +29,7 @@ class Home extends React.Component {
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<View style={{ flex: 1 }}>
 					<Map ref={(mapComponent) => this.mapComponent = mapComponent} />
-					<Button style={styles.button} onPress={this.handleSendRequest}>
-						TELEPORT ME
-				</Button>
+					<Button style={styles.button} onPress={this.handleSendRequest}>TELEPORT</Button>
 					<LocationInput />
 				</View>
 			</TouchableWithoutFeedback >
@@ -45,7 +43,7 @@ const styles = EStyleSheet.create({
 		top: 100,
 		left: 40,
 		padding: 1,
-		height: 65,
+		height: 45,
 		width: 50,
 	},
 });
