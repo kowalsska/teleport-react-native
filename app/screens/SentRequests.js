@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, Text, StatusBar, View, Image } from 'react-native';
 import { Card, ListItem, Button, Avatar, Icon } from 'react-native-elements'
-import { RequestCard } from '../components/RequestCard'
+import { SentRequestCard } from '../components/SentRequestCard'
 import requests from '../data/requests';
 
 class SentRequests extends React.Component {
@@ -12,8 +12,8 @@ class SentRequests extends React.Component {
 				<StatusBar translucent={false} barStyle="default" />
 				<FlatList
 					data={requests}
-					renderItem={({ item }) => <RequestCard username={item.username} location={item.location} avatar={item.avatar} />}
-					keyExtractor={item => item.username}
+					renderItem={({ item }) => <SentRequestCard message={item.message} timestamp={item.timestamp} />}
+					keyExtractor={item => item.timestamp}
 				/>
 			</View>
 		);

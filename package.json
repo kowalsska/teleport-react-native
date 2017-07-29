@@ -34,12 +34,16 @@
     "moment": "^2.18.1",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.46.4",
+    "react-native-button": "^2.1.0",
     "react-native-dropdownalert": "^2.10.0",
     "react-native-elements": "^0.15.0",
     "react-native-extended-stylesheet": "^0.6.0",
     "react-native-maps": "^0.15.3",
     "react-native-material-design": "^0.3.7",
     "react-navigation": "^1.0.0-beta.11",
-    "realm": "^1.10.0"
+    "react-redux": "^5.0.5",
+    "realm": "^1.10.0",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6"
   }
 }

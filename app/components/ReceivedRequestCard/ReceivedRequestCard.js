@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements'
 import styles from './styles';
 
-class RequestCard extends React.Component {
+class ReceivedRequestCard extends React.Component {
     constructor(props) {
         super(props);
 
@@ -61,4 +61,4 @@ class RequestCard extends React.Component {
     };
 };
 
-export default RequestCard;
+export default ReceivedRequestCard;
