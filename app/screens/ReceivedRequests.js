@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FlatList, Text, StatusBar, View, Image } from 'react-native';
 import { Card, ListItem, Button, Avatar, Icon } from 'react-native-elements'
 import { connect } from 'react-redux';

@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { View, Text, Image } from 'react-native';
-//import Realm from 'realm';
+import Realm from 'realm';
 import { RegisterForm } from '../components/RegisterForm';
 
 class Login extends React.Component {

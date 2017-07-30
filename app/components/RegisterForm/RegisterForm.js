@@ -18,6 +18,13 @@ class RegisterForm extends React.Component {
         const { navigate } = this.props.navigation;
         console.log("New user registered!", this.state);
         navigate("Main");
+        Realm.Sync.User.register(SERVER_ADDRESS, this.state.username, this.state.password, (error, user) => {
+            if (error) {
+                console.log("something went wrong", error);
+            } else {
+                console.log("hurray", user);
+            }
+        });
     }
 
     render() {

@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, Image } from 'react-native';
-import { Card, ListItem, Button, Avatar } from 'react-native-elements'
+import { Card, ListItem, Avatar, Button } from 'react-native-elements'
 import styles from './styles';
 
 class ReceivedRequestCard extends React.Component {
