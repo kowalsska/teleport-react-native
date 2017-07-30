@@ -1,31 +1,71 @@
 import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Keyboard, StatusBar } from 'react-native';
+import moment from 'moment';
+import Realm from 'realm';
+
+import { Request, User, Photo } from '../../data/schema';
+import config from '../../config/server';
 import styles from './styles';
-import SERVER_ADDRESS from '../../config/server';
 
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            uuid: '',
             username: '',
             email: '',
             password: '',
             location: '',
+            avatar: null,
         };
     }
 
     registerUser() {
         const { navigate } = this.props.navigation;
-        console.log("New user registered!", this.state);
-        navigate("Main");
-        Realm.Sync.User.register(SERVER_ADDRESS, this.state.username, this.state.password, (error, user) => {
-            if (error) {
-                console.log("something went wrong", error);
+        Realm.Sync.User.login(config.auth_uri, this.state.email, this.state.password, (error, user) => {
+            if (!error) {
+                var realm = new Realm({
+                    sync: {
+                        user: user,
+                        url: config.db_uri,
+                    },
+                    schema: [Request, User, Photo],
+                    path: config.db_path,
+                });
+                console.log("NEW USER", user.identity);
+                try {
+                    // realm.write(() => {
+                    //     realm.create('User', {
+                    //         uuid: user.identity,
+                    //         email: this.state.email,
+                    //         username: this.state.username,
+                    //         location: this.state.location,
+                    //         avatar: this.state.avatar,
+                    //     });
+                    // });
+                    realm.write(() => {
+                        realm.create('Request', {
+                            timestamp: parseInt(moment().format('x')),
+                            latitude: 777,
+                            latitude: 777,
+                            message: 'Czarny kot bialy kot',
+                            author: null,
+                            photos: [],
+                        });
+                    });
+                    let allRequests = realm.objects('Request');
+                    let allUsers = realm.objects('User');
+                    console.log("allRequests", allRequests);
+                    //console.log("allUsers", allUsers);
+                } catch (e) {
+                    console.log("Error", e);
+                };
+                navigate("Main");
             } else {
-                console.log("hurray", user);
+                console.log("COULD NOT VERIFY THE USER");
             }
         });
-    }
+    };
 
     render() {
         return (

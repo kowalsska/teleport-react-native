@@ -1,3 +1,8 @@
-const SERVER_ADDRESS = "http://127.0.0.1:9080"
-
-export default SERVER_ADDRESS;
+export default {
+    auth_uri: "http://localhost:9080",
+    db_uri: "realm://localhost:9080/~/teleport1",
+    admin_token: null, // "addTokenHexForAdminAccess=="
+    db_path: "teleport1.realm",
+    default_login: 'info@realm.io',
+    default_password: '123',
+};

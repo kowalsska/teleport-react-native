@@ -27,7 +27,7 @@ class ReceivedRequests extends React.Component {
 }
 
 const mapStatetoProps = (state) => {
-  const requests = state.requests;
+  const requests = state.requests.requestsList;
   return {
     requests
   };

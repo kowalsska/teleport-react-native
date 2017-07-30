@@ -3,6 +3,7 @@ package com.teleportapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNUUIDGeneratorPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import io.realm.react.RealmReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNUUIDGeneratorPackage(),
             new VectorIconsPackage(),
             new RealmReactPackage(),
             new MapsPackage()
