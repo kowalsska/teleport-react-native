@@ -1,23 +1,32 @@
 export const SEND_REQUEST = "SEND_REQUEST";
-export const GET_REQUESTS = "GET_REQUESTS";
-export const REGISTER_USER = "REGISTER_USER";
-export const LOGIN_USER = "LOGIN_USER";
+export const GET_INITIAL_REQUESTS = "GET_INITIAL_REQUESTS";
+export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
+export const LIKE_ADDED = "LIKE_ADDED";
+export const DISLIKE_ADDED = "DISLIKE_ADDED";
 
-export const registerUser = (email, password, username, location, avatar) => ({
-    type: REGISTER_USER,
-    email, password, username, location, avatar,
-});
-
-export const loginUser = (email, password) => ({
-    type: LOGIN_USER,
-    email, password,
-});
+export const REQUESTS_RESULT = "REQUESTS_RESULT";
+export const REQUESTS_ERROR = "REQUESTS_ERROR";
 
 export const sendRequest = (lat, lng, timestamp, username, message) => ({
     type: SEND_REQUEST,
     lat, lng, timestamp, username, message,
 });
 
-export const getRequests = () => ({
-    type: GET_REQUESTS,
+export const getInitialRequests = () => ({
+    type: GET_INITIAL_REQUESTS,
+});
+
+export const uploadPhoto = (image, timestamp) => ({
+    type: UPLOAD_PHOTO,
+    image, timestamp
+});
+
+export const likeAdded = (imageId, userId) => ({
+    type: LIKE_ADDED,
+    imageId, userId,
+});
+
+export const dislikeAdded = (imageId, userId) => ({
+    type: DISLIKE_ADDED,
+    imageId, userId,
 });

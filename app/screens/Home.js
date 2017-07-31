@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import { Map } from '../components/Map';
 import { LocationInput } from '../components/LocationInput';
-import { sendRequest } from '../actions/requests';
+import { sendRequest, getInitialRequests } from '../actions/requests';
 
 class Home extends React.Component {
 	static propTypes = {
@@ -20,9 +20,16 @@ class Home extends React.Component {
 		this.state = {};
 	}
 
+	componentWillMount() {
+		this.props.dispatch(getInitialRequests());
+	}
+
 	handleSendRequest = () => {
 		this.props.dispatch(sendRequest(this.mapComponent.state.region.latitude,
-			this.mapComponent.state.region.longitude, moment().format('x'), "Magda", "What is up?"));
+										this.mapComponent.state.region.longitude, 
+										moment().format('x'), 
+										"Magda", 
+										"What is up?"));
 	}
 
 	render() {
@@ -50,8 +57,10 @@ const styles = EStyleSheet.create({
 });
 
 const mapStatetoProps = (state) => {
+	const settings = state.settings;
+	const requests = state.requests;
 	return {
-
+		settings, requests,
 	};
 };
 

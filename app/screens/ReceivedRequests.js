@@ -9,7 +9,7 @@ import { ReceivedRequestCard } from '../components/ReceivedRequestCard'
 class ReceivedRequests extends React.Component {
   static propTypes = {
     navigation: PropTypes.object,
-    requests: PropTypes.array,
+    receivedRequests: PropTypes.array,
   }
 
   render() {
@@ -17,8 +17,8 @@ class ReceivedRequests extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar translucent={false} barStyle="default" />
         <FlatList
-          data={this.props.requests}
-          renderItem={({ item }) => <ReceivedRequestCard username={item.username} location={item.location} avatar={item.avatar} />}
+          data={this.props.receivedRequests}
+          renderItem={({ item }) => <ReceivedRequestCard username={item.timestamp} location={item.latitude} />}
           keyExtractor={item => item.timestamp}
         />
       </View>
@@ -27,9 +27,9 @@ class ReceivedRequests extends React.Component {
 }
 
 const mapStatetoProps = (state) => {
-  const requests = state.requests;
+  const receivedRequests = state.requests.inMyArea;
   return {
-    requests
+    receivedRequests
   };
 };
 

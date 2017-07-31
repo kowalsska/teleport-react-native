@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import RealmTasks from '../../data/realm-tasks';
 import config from '../../config/server';
 import styles from './styles';
-import { getRequests } from '../../actions/requests';
 
 class RegisterForm extends React.Component {
     static propTypes = {
@@ -27,9 +26,6 @@ class RegisterForm extends React.Component {
 
     register() {
         const { navigate } = this.props.navigation;
-        //registerUser(this.state.email, this.state.password, this.state.username, this.state.location);
-        //loginUser(this.state.email, this.state.password);
-        //this.props.dispatch(getRequests());
         RealmTasks.register(
             this.state.email,
             this.state.password,

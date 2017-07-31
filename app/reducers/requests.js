@@ -1,27 +1,51 @@
-import { SEND_REQUEST, GET_REQUESTS } from '../actions/requests';
-import { addRequest, getAllRequests } from '../data/realm-tasks';
+import { SEND_REQUEST, GET_INITIAL_REQUESTS, REQUESTS_RESULT, REQUESTS_ERROR } from '../actions/requests';
 
-const initialState = [];
+const initialState = {
+    inMyArea: [],
+    myRequests: [],
+}
 
-const reducer = (state = initialState, action) => {
+const getRequestsInMyArea = (result) => {
+    let myLatitude = 100;
+    let myLongitude = 100;
+    return result.map(item => {
+        return Math.abs(item.latitude) - Math.abs(myLatitude) <= 100;
+    })
+}
+
+const requestsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEND_REQUEST:
-            addRequest(action.lat, action.lng, action.message);
-            return [
+            const newRequest = {
+                latitude: action.lat,
+                longitude: action.lng,
+                timestamp: action.timestamp,
+                username: action.username,
+                message: action.message,
+            }
+            return {
                 ...state,
-            ]
-        case GET_REQUESTS:
-            console.log("IN GET_REQUESTS REDUCER");
-            const requestsFromDatabase = getAllRequests() || [];
-            return [
+                myRequests: [...state.myRequests, newRequest],
+            }
+        case GET_INITIAL_REQUESTS:
+            return {
                 ...state,
-                requestsFromDatabase
-            ]
+            }
+        case REQUESTS_RESULT:
+            console.log("action request result", action.result);
+            return {
+                ...state,
+                inMyArea: [...state, ...action.result]
+            }
+        case REQUESTS_ERROR:
+            return {
+                ...state,
+            }
         default:
-            return [
+            return {
                 ...state,
-            ]
+            }
     }
 }
 
-export default reducer;
+export default requestsReducer;
