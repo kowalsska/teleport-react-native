@@ -2,3 +2,5 @@ node_modules/
 .expo/
 npm-debug.*
 ios/build
+android/build
+.DS_Store
