@@ -1,6 +1,9 @@
 node_modules/
-.expo/
 npm-debug.*
 ios/build
 android/build
+.idea
+.gradle
+local.properties
+*.iml
 .DS_Store
