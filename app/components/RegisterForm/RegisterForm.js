@@ -1,70 +1,52 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Keyboard, StatusBar } from 'react-native';
+import PropTypes from 'prop-types';
+import { AsyncStorage, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, Keyboard, StatusBar } from 'react-native';
 import moment from 'moment';
-import Realm from 'realm';
+import { connect } from 'react-redux';
 
-import { Request, User, Photo } from '../../data/schema';
+import RealmTasks from '../../data/realm-tasks';
 import config from '../../config/server';
 import styles from './styles';
+import { getRequests } from '../../actions/requests';
 
 class RegisterForm extends React.Component {
+    static propTypes = {
+        dispatch: PropTypes.func,
+    }
     constructor(props) {
         super(props);
         this.state = {
-            uuid: '',
             username: '',
             email: '',
             password: '',
             location: '',
             avatar: null,
+            error: '',
         };
     }
 
-    registerUser() {
+    register() {
         const { navigate } = this.props.navigation;
-        Realm.Sync.User.login(config.auth_uri, this.state.email, this.state.password, (error, user) => {
-            if (!error) {
-                var realm = new Realm({
-                    sync: {
-                        user: user,
-                        url: config.db_uri,
-                    },
-                    schema: [Request, User, Photo],
-                    path: config.db_path,
+        //registerUser(this.state.email, this.state.password, this.state.username, this.state.location);
+        //loginUser(this.state.email, this.state.password);
+        //this.props.dispatch(getRequests());
+        RealmTasks.register(
+            this.state.email,
+            this.state.password,
+            this.state.email,
+            this.state.location,
+            (error, realm) => {
+                console.log("halo halo");
+                RealmTasks.realm = realm;
+                this.setState({
+                    error: error ? error.message : "Success"
                 });
-                console.log("NEW USER", user.identity);
-                try {
-                    // realm.write(() => {
-                    //     realm.create('User', {
-                    //         uuid: user.identity,
-                    //         email: this.state.email,
-                    //         username: this.state.username,
-                    //         location: this.state.location,
-                    //         avatar: this.state.avatar,
-                    //     });
-                    // });
-                    realm.write(() => {
-                        realm.create('Request', {
-                            timestamp: parseInt(moment().format('x')),
-                            latitude: 777,
-                            latitude: 777,
-                            message: 'Czarny kot bialy kot',
-                            author: null,
-                            photos: [],
-                        });
-                    });
-                    let allRequests = realm.objects('Request');
-                    let allUsers = realm.objects('User');
-                    console.log("allRequests", allRequests);
-                    //console.log("allUsers", allUsers);
-                } catch (e) {
-                    console.log("Error", e);
-                };
-                navigate("Main");
-            } else {
-                console.log("COULD NOT VERIFY THE USER");
+                console.log("this.state.error", this.state.error);
+                if (this.state.error === "Success") {
+                    navigate("Main");
+                }
             }
-        });
+        );
     };
 
     render() {
@@ -110,7 +92,7 @@ class RegisterForm extends React.Component {
                     placeholderTextColor='rgba(255, 255, 255, 0.5)' />
                 <TouchableOpacity
                     style={styles.buttonContainer}
-                    onPress={() => this.registerUser()}>
+                    onPress={this.register.bind(this)}>
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
@@ -118,4 +100,4 @@ class RegisterForm extends React.Component {
     };
 };
 
-export default RegisterForm;
+export default connect()(RegisterForm);;
