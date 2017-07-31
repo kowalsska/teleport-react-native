@@ -9,6 +9,7 @@ import moment from 'moment';
 import { Map } from '../components/Map';
 import { LocationInput } from '../components/LocationInput';
 import { sendRequest, getInitialRequests } from '../actions/requests';
+import { getCurrentLocation } from '../actions/settings';
 
 class Home extends React.Component {
 	static propTypes = {
@@ -21,15 +22,17 @@ class Home extends React.Component {
 	}
 
 	componentWillMount() {
+		this.props.dispatch(getCurrentLocation());
 		this.props.dispatch(getInitialRequests());
 	}
 
 	handleSendRequest = () => {
-		this.props.dispatch(sendRequest(this.mapComponent.state.region.latitude,
-										this.mapComponent.state.region.longitude, 
-										moment().format('x'), 
-										"Magda", 
-										"What is up?"));
+		console.log("MAP STATE", this.mapComponent.state);
+		this.props.dispatch(sendRequest(this.mapComponent.state.latitude,
+			this.mapComponent.state.longitude,
+			moment().format('x'),
+			"Magda",
+			"What is up?"));
 	}
 
 	render() {

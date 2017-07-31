@@ -6,10 +6,10 @@ import config from '../config/server';
 
 let realm = null;
 
-function connect(action, username, password, email, location, callback) {
-    username = username.trim();
+function connect(action, email, password, username, location, callback) {
+    email = email.trim();
     password = password.trim();
-    if (username === '') {
+    if (email === '') {
         return callback(new Error('Username cannot be empty'));
     } else if (password === '') {
         return callback(new Error('Password cannot be empty'));

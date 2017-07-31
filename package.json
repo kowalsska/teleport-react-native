@@ -14,6 +14,11 @@
     "prettier-eslint": "^6.2.0",
     "react-test-renderer": "16.0.0-alpha.12"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",

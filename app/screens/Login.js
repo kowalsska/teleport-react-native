@@ -1,26 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { View, Text, Image } from 'react-native';
+
 import { RegisterForm } from '../components/RegisterForm';
+import { LoginForm } from '../components/LoginForm';
+import { getCurrentLocation } from '../actions/settings';
+
 
 class Login extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
+		dispatch: PropTypes.func,
 	}
+
+	componentWillMount() {
+		//this.props.dispatch(getCurrentLocation());
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.logoContainer}>
 					<Image
 						style={styles.logo}
-						source={{ uri: "http://i.imgur.com/HjctfpK.png" }} />
-					<Text style={styles.title}>
-						Teleport is the coolest app ever. Please register below.
-                    </Text>
+						source={require('../config/icon.png')} />
 				</View>
 				<View style={styles.formContainer}>
-					<RegisterForm navigation={this.props.navigation} />
+					<LoginForm navigation={this.props.navigation} />
 				</View>
 
 			</View>
@@ -31,7 +39,7 @@ class Login extends React.Component {
 const styles = EStyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#d35400',
+		backgroundColor: '#F2F4F4',
 	},
 	logoContainer: {
 		alignItems: 'center',
@@ -39,15 +47,16 @@ const styles = EStyleSheet.create({
 		justifyContent: 'center',
 	},
 	logo: {
-		width: 100,
-		height: 100,
+		width: 250,
+		height: 250,
 	},
 	title: {
 		color: "#FFF",
 		marginTop: 10,
 		width: 160,
 		textAlign: "center",
-		opacity: 0.8,
+		opacity: 1,
+		fontWeight: "bold",
 	},
 	formContainer: {
 		justifyContent: 'center',
@@ -57,4 +66,12 @@ const styles = EStyleSheet.create({
 	}
 });
 
-export default Login;
+const mapStatetoProps = (state) => {
+	const settings = state.settings;
+	const requests = state.requests;
+	return {
+		settings, requests,
+	};
+};
+
+export default connect(mapStatetoProps)(Login);

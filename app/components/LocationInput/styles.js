@@ -10,5 +10,6 @@ export default EStyleSheet.create({
         width: Dimensions.get("window").width,
         borderColor: 'gray',
         borderWidth: 1,
+        fontFamily: 'BebasNeueRegular',
     },
 });
