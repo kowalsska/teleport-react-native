@@ -1,3 +1,5 @@
+import geolib from 'geolib';
+
 import { SEND_REQUEST, GET_INITIAL_REQUESTS, REQUESTS_RESULT, REQUESTS_ERROR } from '../actions/requests';
 
 const initialState = {
@@ -6,10 +8,10 @@ const initialState = {
 }
 
 const getRequestsInMyArea = (result) => {
-    let myLatitude = 100;
-    let myLongitude = 100;
-    return result.map(item => {
-        return Math.abs(item.latitude) - Math.abs(myLatitude) <= 100;
+    return result.filter(item => {
+        let myLocation = { latitude: 37.78825, longitude: -122.4324 };
+        let itemLocation = { latitude: item.latitude, longitude: item.longitude };
+        return geolib.getDistance(myLocation, itemLocation) <= 500;
     })
 }
 
@@ -32,10 +34,11 @@ const requestsReducer = (state = initialState, action) => {
                 ...state,
             }
         case REQUESTS_RESULT:
-            console.log("action request result", action.result);
+            let inmyarea = getRequestsInMyArea(action.result);
+            console.log("action request result", inmyarea);
             return {
                 ...state,
-                inMyArea: [...state, ...action.result]
+                inMyArea: [...state, ...inmyarea],
             }
         case REQUESTS_ERROR:
             return {

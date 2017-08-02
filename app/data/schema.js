@@ -6,8 +6,8 @@ Request.schema = {
     primaryKey: 'timestamp',
     properties: {
         timestamp: 'int',
-        latitude: 'int',
-        latitude: 'int',
+        latitude: 'double',
+        longitude: 'double',
         message: 'string',
         author: { type: 'User' },
         photos: { type: 'list', objectType: 'Photo' },

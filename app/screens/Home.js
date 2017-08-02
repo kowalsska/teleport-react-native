@@ -9,7 +9,6 @@ import moment from 'moment';
 import { Map } from '../components/Map';
 import { LocationInput } from '../components/LocationInput';
 import { sendRequest, getInitialRequests } from '../actions/requests';
-import { getCurrentLocation } from '../actions/settings';
 
 class Home extends React.Component {
 	static propTypes = {
@@ -22,16 +21,15 @@ class Home extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.dispatch(getCurrentLocation());
 		this.props.dispatch(getInitialRequests());
 	}
 
 	handleSendRequest = () => {
 		console.log("MAP STATE", this.mapComponent.state);
-		this.props.dispatch(sendRequest(this.mapComponent.state.latitude,
-			this.mapComponent.state.longitude,
+		this.props.dispatch(sendRequest(this.mapComponent.state.region.latitude,
+			this.mapComponent.state.region.longitude,
 			moment().format('x'),
-			"Magda",
+			"NewUser",
 			"What is up?"));
 	}
 
@@ -59,12 +57,12 @@ const styles = EStyleSheet.create({
 	},
 });
 
-const mapStatetoProps = (state) => {
-	const settings = state.settings;
-	const requests = state.requests;
-	return {
-		settings, requests,
-	};
-};
+// const mapStatetoProps = (state) => {
+// 	const settings = state.settings;
+// 	const requests = state.requests;
+// 	return {
+// 		settings, requests,
+// 	};
+// };
 
-export default connect(mapStatetoProps)(Home);
+export default connect()(Home);

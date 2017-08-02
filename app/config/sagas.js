@@ -28,12 +28,35 @@ function* fetchRequestsForTheUser(action) {
     } catch (e) {
         yield put({ type: REQUESTS_ERROR, error: e.message });
     }
-
 }
+
+function* writeRequestToDatabase(action) {
+    if (RealmTasks.realm) {
+        try {
+            RealmTasks.realm.write(() => {
+                let obj = {
+                    timestamp: parseInt(action.timestamp),
+                    latitude: action.lat,
+                    longitude: action.lng,
+                    message: action.message,
+                    author: null,
+                    photos: [],
+                }
+                console.log("WRITING TO DB:", obj)
+                RealmTasks.realm.create('Request', obj);
+            });
+        } catch (e) {
+            console.log("COULD NOT WRITE TO DATABASE", e);
+        }
+    } else {
+        return [];
+    }
+}
+
 
 export default function* rootSaga() {
     yield takeEvery(GET_INITIAL_REQUESTS, fetchRequestsForTheUser);
-    //yield takeEvery(SEND_REQUEST, fetchRequestsForTheUser);
+    yield takeEvery(SEND_REQUEST, writeRequestToDatabase);
     //yield takeEvery(UPLOAD_PHOTO, fetchRequestsForTheUser);
     //yield takeEvery(LIKE_ADDED, fetchRequestsForTheUser);
     //yield takeEvery(DISLIKE_ADDED, fetchRequestsForTheUser);

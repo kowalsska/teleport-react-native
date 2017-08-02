@@ -6,7 +6,6 @@ import { View, Text, Image } from 'react-native';
 
 import { RegisterForm } from '../components/RegisterForm';
 import { LoginForm } from '../components/LoginForm';
-import { getCurrentLocation } from '../actions/settings';
 
 
 class Login extends React.Component {
@@ -16,7 +15,6 @@ class Login extends React.Component {
 	}
 
 	componentWillMount() {
-		//this.props.dispatch(getCurrentLocation());
 	}
 
 	render() {
@@ -30,7 +28,6 @@ class Login extends React.Component {
 				<View style={styles.formContainer}>
 					<LoginForm navigation={this.props.navigation} />
 				</View>
-
 			</View>
 		)
 	};

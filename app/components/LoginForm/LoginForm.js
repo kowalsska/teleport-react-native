@@ -18,14 +18,15 @@ class LoginForm extends React.Component {
             email: '',
             password: '',
             error: '',
+            'username': 'User2',
+            'location': 'Nowhere',
         };
     }
 
     login() {
         const { navigate } = this.props.navigation;
         RealmTasks.login(
-            this.state.email,
-            this.state.password, '', '',
+            this.state.email, this.state.password, this.state.username, this.state.location,
             (error, realm) => {
                 RealmTasks.realm = realm;
                 this.setState({
